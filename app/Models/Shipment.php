@@ -9,15 +9,16 @@ class Shipment extends Model
 {
     use HasFactory;
 
-    // override nama tabel default
-    protected $table = 'shipment';
+    protected $table = 'shipments';  // pastikan ini sesuai nama tabel di DB
 
     protected $fillable = [
         'tracking_number',
         'sender',
         'receiver',
-        'status'
+        'status',
     ];
+
+    // timestamps otomatis aktif, gak perlu set public $timestamps
 
     public function logs()
     {

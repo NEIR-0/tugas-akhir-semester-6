@@ -8,11 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('shipment', function (Blueprint $table) {
+        Schema::create('shipment_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('tracking_number')->unique();
-            $table->string('sender');
-            $table->string('receiver');
+            $table->foreignId('shipment_id')->constrained('shipments')->onDelete('cascade');
+            $table->string('location');
             $table->string('status');
             $table->timestamps();
         });
@@ -20,6 +19,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('shipment');
+        Schema::dropIfExists('shipment_logs');
     }
 };

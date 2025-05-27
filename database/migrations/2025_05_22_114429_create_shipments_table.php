@@ -6,20 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('shipments', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // bigIncrements
+            $table->string('tracking_number')->unique();
+            $table->string('sender');
+            $table->string('receiver');
+            $table->string('status');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('shipments');
