@@ -7,12 +7,31 @@
         table { border-collapse: collapse; width: 100%; }
         table, th, td { border: 1px solid black; }
         th, td { padding: 10px; text-align: left; }
+        .logout-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            float: right;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .logout-button:hover {
+            background-color: #c0392b;
+        }
     </style>
 </head>
 <body>
     <h1>All Shipments</h1>
 
-    <a href="/shipment/create">+ Create New Shipment</a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:inline;">
+        @csrf
+        <button type="submit" class="logout-button">Logout</button>
+    </form>
+
+    <a href="/shipment/create" style="margin-left: 10px;">+ Create New Shipment</a>
 
     <br><br>
 
