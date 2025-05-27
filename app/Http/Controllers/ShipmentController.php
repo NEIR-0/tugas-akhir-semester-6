@@ -9,10 +9,26 @@ use Illuminate\Support\Facades\Log;
 
 class ShipmentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $shipments = Shipment::all();
-        return view('shipment.index', compact('shipments'));
+        return view('shipment.index');
+    }
+
+    public function apiIndex(Request $request)
+    {
+        $search = $request->input('search');
+
+        $shipments = Shipment::when($search, function($query, $search) {
+            $query->where('tracking_number', 'like', "%{$search}%")
+                ->orWhere('sender', 'like', "%{$search}%")
+                ->orWhere('receiver', 'like', "%{$search}%")
+                ->orWhere('status', 'like', "%{$search}%");
+        })->get();
+
+        // Return JSON response
+        return response()->json([
+            'shipments' => $shipments,
+        ]);
     }
 
     public function create()
