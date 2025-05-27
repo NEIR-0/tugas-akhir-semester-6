@@ -19,3 +19,7 @@ Route::get('login', [AuthController::class, 'showLoginForm'])->name('login.form'
 Route::post('login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/admin', function () {
+    return 'Welcome Admin!';
+})->middleware(['auth', 'role:super admin']);
